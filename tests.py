@@ -1,6 +1,7 @@
 # encoding: utf8
 
 import pytest
+import requests_mock
 from django.conf import settings
 
 from sms import SMS
@@ -15,7 +16,13 @@ class TestSMS(object):
         return SMS(settings.SMS['HOST'], settings.SMS['PRODUCT'])
 
     def test_register(self, sms):
-        assert sms.register(PHONE) is True
+        with requests_mock.mock() as m:
+            url = sms.host + '/v1/api/sms/register/'
+            m.post(url, text='')
+            assert sms.register(PHONE) is True
 
     def test_verify(self, sms):
-        assert sms.verify(PHONE, CAPTCHA) in (True, False,)
+        with requests_mock.mock() as m:
+            url = sms.host + '/v2/api/sms/register/'
+            m.get(url, text='{"valid": true}')
+            assert sms.verify(PHONE, CAPTCHA) in (True, False,)
