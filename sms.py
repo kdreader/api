@@ -1,9 +1,10 @@
 # encoding: utf-8
 
-
 import json
 import urllib
 import requests
+
+__all__ = ('SMS',)
 
 
 def compose_url(host, path, query_string=None):
