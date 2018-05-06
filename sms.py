@@ -54,8 +54,8 @@ class SMS(object):
         else:
             return False
 
-    def common(self, phone):
-        path = '/v1/api/sms/'
+    def verify_code(self, phone):
+        path = '/v1/api/sms/verify_code/'
         data = {
             'product': self.product,
             'phone': phone,
