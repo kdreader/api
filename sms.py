@@ -40,6 +40,32 @@ class SMS(object):
         else:
             return False
 
+    def login(self, phone):
+        path = '/v1/api/sms/login/'
+        data = {
+            'product': self.product,
+            'phone': phone,
+        }
+        url = compose_url(self.host, path,)
+        resp = requests.post(url, json=data)
+        if resp.status_code == 200:
+            return True
+        else:
+            return False
+
+    def common(self, phone):
+        path = '/v1/api/sms/'
+        data = {
+            'product': self.product,
+            'phone': phone,
+        }
+        url = compose_url(self.host, path,)
+        resp = requests.post(url, json=data)
+        if resp.status_code == 200:
+            return True
+        else:
+            return False
+
     def verify(self, phone, captcha):
         path = '/v2/api/sms/register/'
         data = {

@@ -21,6 +21,18 @@ class TestSMS(object):
             m.post(url, text='')
             assert sms.register(PHONE) is True
 
+    def test_login(self, sms):
+        with requests_mock.mock() as m:
+            url = sms.host + '/v1/api/sms/login/'
+            m.post(url, text='')
+            assert sms.login(PHONE) is True
+
+    def test_common(self, sms):
+        with requests_mock.mock() as m:
+            url = sms.host + '/v1/api/sms/'
+            m.post(url, text='')
+            assert sms.common(PHONE) is True
+
     def test_verify(self, sms):
         with requests_mock.mock() as m:
             url = sms.host + '/v2/api/sms/register/'
