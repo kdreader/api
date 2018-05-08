@@ -68,7 +68,7 @@ class SMS(object):
             return False
 
     def verify(self, phone, captcha):
-        path = '/v2/api/sms/register/'
+        path = '/v2/api/sms/verify/'
         data = {
             'phone': phone,
             'captcha': captcha,
