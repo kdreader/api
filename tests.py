@@ -35,6 +35,6 @@ class TestSMS(object):
 
     def test_verify(self, sms):
         with requests_mock.mock() as m:
-            url = sms.host + '/v2/api/sms/register/'
+            url = sms.host + '/v2/api/sms/verify/'
             m.get(url, text='{"valid": true}')
             assert sms.verify(PHONE, CAPTCHA) in (True, False,)
